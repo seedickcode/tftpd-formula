@@ -1,0 +1,26 @@
+# -*- coding: utf-8 -*-
+# vim: ft=jinja
+
+{## Start with  defaults from defaults.yaml ##}
+{% import_yaml "tftpd/defaults.yaml" as default_settings %}
+
+{% set tftpd = salt['grains.filter_by']({
+    'Debian': {
+        'server': 'tftpd-hpa',
+        'service': 'tftpd-hpa',
+        'service_config': '/etc/default/tftpd-hpa',
+    },
+    'RedHat': {
+        'server': 'tftp-server',
+        'service': 'tftpd',
+        'config': '/etc/tftpd/tftpd.conf',
+    },
+}, merge=salt['pillar.get']('tftpd:lookup')) %}
+
+{## Merge in salt:lookup pillar ##}
+{% set tftpd_settings = salt['pillar.get'](
+    'tftpd:config',
+    default=default_settings.tftpd,
+    merge=True)
+%}
+

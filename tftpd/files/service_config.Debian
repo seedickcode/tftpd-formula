@@ -1,0 +1,11 @@
+# default/tftpd
+#
+# SaltStack-generated default configuration for tftpd-hpa
+#
+# /etc/default/tftpd-hpa
+{% from "tftpd/map.jinja" import tftpd_settings with context %}
+
+TFTP_USERNAME="{{ tftpd_settings.user }}"
+TFTP_DIRECTORY="{{ tftpd_settings.directory }}"
+TFTP_ADDRESS="{{ tftpd_settings.bind_address }}"
+TFTP_OPTIONS="{{ tftpd_settings.options }}"

@@ -1,0 +1,7 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+tftpd:
+  user: tftp
+  directory: /srv/tftp
+  bind_address: '0.0.0.0:69'
+  options: '--secure'
